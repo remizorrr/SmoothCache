@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "A278CE74BC600194DFBF577D4425EA1DDC2D7E22",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "A278CE74BC600194DFBF577D4425EA1DDC2D7E22" : 0,
+    "9D9408DE29814A85D4F4288F27901FA74F87FF91" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "EBE2EAAD-AF58-4AC3-B91C-0DA2F14015B0",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "A278CE74BC600194DFBF577D4425EA1DDC2D7E22" : "SmoothCache\/",
+    "9D9408DE29814A85D4F4288F27901FA74F87FF91" : ".."
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "SmoothCache",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "SmoothCache.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/photokeeper\/Photo_Keeper_iOS.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "9D9408DE29814A85D4F4288F27901FA74F87FF91"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/remizorrr\/SmoothCache.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "A278CE74BC600194DFBF577D4425EA1DDC2D7E22"
+    }
+  ]
+}
