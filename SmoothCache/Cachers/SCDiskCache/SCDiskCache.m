@@ -118,7 +118,7 @@
             NSLog(@"SCDiskCache Error: Failed fetching size: %@",error.description);
             continue;
         }
-        totalInCache += [fileSize longValue];
+        totalInCache += [fileSize longValue]/1000;
         if (totalInCache >= kilobytes)
             if(![[NSFileManager defaultManager] removeItemAtURL:fileUrl error:&error]) {
                 NSLog(@"SCDiskCache Error: Failed deleting file: %@",error.description);

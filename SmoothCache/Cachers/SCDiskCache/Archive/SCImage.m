@@ -24,7 +24,15 @@
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
-    return [self initWithData:[aDecoder decodeDataObject]];
+    self = [self initWithData:[aDecoder decodeDataObject]];
+    if (self) {
+        // This code suppose to render the image on the background thread, when it is loaded from file, and display it instantly on the main thread.
+        UIGraphicsBeginImageContext(CGSizeMake(1,1));
+        CGContextRef context = UIGraphicsGetCurrentContext();
+        CGContextDrawImage(context, CGRectMake(0, 0, 1, 1), [self CGImage]);
+        UIGraphicsEndImageContext();
+    }
+    return self;
 }
 
 @end
