@@ -22,7 +22,7 @@ extern NSString * const SCCacheTypeDisk;
 
 - (void) registerCacher:(id<SCCaching>)cacher withKey:(NSString*)key;
 - (void) cacheObject:(id)object forKey:(NSString*)key completion:(void (^)())completion;
-- (void) objectForKey:(NSString*)objectForKey completion:(void(^)(id object)) completion;
+- (void) objectForKey:(NSString*)key completion:(void(^)(id object, NSString* cache)) completion;
 - (void) cacheObject:(id)object inCaches:(NSArray<NSString*>*)cacheTypes forKey:(NSString*)key completion:(void(^)())completion;
 - (NSArray<NSString*>*) cacheTypesForKey:(NSString*)key;
 - (void) setCacheLimit:(float)megabytes forCache:(NSString*)type;

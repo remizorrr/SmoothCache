@@ -82,7 +82,7 @@ NSString * const SCCacheTypeDisk = @"SCCacheTypeDisk";
     return self;
 }
 
-- (void) objectForKey:(NSString*)key completion:(void(^)(id object)) completion {
+- (void) objectForKey:(NSString*)key completion:(void(^)(id object, NSString* cache)) completion {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),^{
         for (NSInteger i = 0; i < _cacherKeys.count; ++i) {
             NSString* cacheKey = _cacherKeys[i];
@@ -91,7 +91,7 @@ NSString * const SCCacheTypeDisk = @"SCCacheTypeDisk";
             if (object) {
                 if (completion) {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        completion(object);
+                        completion(object, cacheKey);
                     });
                 }
                 if (i > 0) {
@@ -100,7 +100,7 @@ NSString * const SCCacheTypeDisk = @"SCCacheTypeDisk";
                 return;
             }
         }
-        completion(nil);
+        completion(nil, nil);
     });
 }
 
