@@ -18,7 +18,7 @@ NSString * const SCCacheTypeDisk = @"SCCacheTypeDisk";
     NSCache* _ramCache;
     float driveCacheSize;
     float ramCacheSize;
-    NSMutableDictionary <NSString*, id<SCCaching>>* _cachers;
+//    NSMutableDictionary <NSString*, id<SCCaching>>* _cachers;
     NSMutableArray* _cacherKeys;
 }
 

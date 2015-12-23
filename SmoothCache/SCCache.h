@@ -15,7 +15,7 @@ extern NSString * const SCCacheTypeDisk;
 @interface SCCache : NSObject
 
 @property (nonatomic, weak) id delegate;
-@property (nonatomic, readonly) NSDictionary <NSString*, id<SCCaching>>* cachers;
+@property (nonatomic, strong) NSMutableDictionary <NSString*, id<SCCaching>>* cachers;
 
 
 + (instancetype) defaultCache;
