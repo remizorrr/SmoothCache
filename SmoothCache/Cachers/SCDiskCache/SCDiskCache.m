@@ -233,4 +233,9 @@
     
 }
 
+- (BOOL) async {
+    return YES;
+}
+
+
 @end

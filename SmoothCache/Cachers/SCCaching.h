@@ -16,5 +16,6 @@
 - (void) removeObjectForKey:(NSString*)key;
 - (void) setCacheLimit:(float) megabytes;
 - (void) setFreeSpaceLimit:(float) megabytes;
+- (BOOL) async;
 
 @end

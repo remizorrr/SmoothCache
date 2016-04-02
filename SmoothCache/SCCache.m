@@ -82,21 +82,47 @@ NSString * const SCCacheTypeDisk = @"SCCacheTypeDisk";
     return self;
 }
 
+- (void) completeFetchWithObject:(id)object async:(BOOL)async withKey:(NSString*)key forCacheAtIndex:(NSInteger)i withCompletion:(void(^)(id object, NSString* cache)) completion {
+    if (object) {
+        if (completion) {
+            if (async) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    completion(object, _cacherKeys[i]);
+                });
+            } else {
+                completion(object, _cacherKeys[i]);
+            }
+        }
+        if (i > 0) {
+            [self cacheObject:object inCaches:[_cacherKeys subarrayWithRange:NSMakeRange(0, i)] forKey:key completion:nil];
+        }
+    }
+}
+
 - (void) objectForKey:(NSString*)key completion:(void(^)(id object, NSString* cache)) completion {
+    NSInteger index = 0;
+    
+    NSString* cacheKey = _cacherKeys[0];
+    id<SCCaching> cacher = _cachers[cacheKey];;
+    
+    while (![cacher async] && (index < _cacherKeys.count)) {
+        id object = [cacher objectForKey:key];
+        if(object) {
+            [self completeFetchWithObject:object async:[cacher async] withKey:key forCacheAtIndex:index withCompletion:completion];
+            return;
+        }
+        ++index;
+        cacheKey = _cacherKeys[index];
+        cacher = _cachers[cacheKey];;
+    }
+
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),^{
-        for (NSInteger i = 0; i < _cacherKeys.count; ++i) {
+        for (NSInteger i = index; i < _cacherKeys.count; ++i) {
             NSString* cacheKey = _cacherKeys[i];
             id<SCCaching> cacher = _cachers[cacheKey];
             id object = [cacher objectForKey:key];
-            if (object) {
-                if (completion) {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        completion(object, cacheKey);
-                    });
-                }
-                if (i > 0) {
-                    [self cacheObject:object inCaches:[_cacherKeys subarrayWithRange:NSMakeRange(0, i)] forKey:key completion:nil];
-                }
+            if(object) {
+                [self completeFetchWithObject:object async:YES withKey:key forCacheAtIndex:i withCompletion:completion];
                 return;
             }
         }

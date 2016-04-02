@@ -53,4 +53,8 @@
     NSLog(@"SCRAMCache Warning: Free space limit is not supported by SCRAMCache");
 }
 
+- (BOOL) async {
+    return NO;
+}
+
 @end
