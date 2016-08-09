@@ -1,26 +1,26 @@
 //
-//  UITableViewCell+SC.m
-//  Tella
+//  UICollectionViewCell+SC.m
+//  Vacarious
 //
-//  Created by Anton Remizov on 7/7/16.
+//  Created by Anton Remizov on 8/5/16.
 //  Copyright © 2016 Appcoming. All rights reserved.
 //
 
-#import "UITableViewCell+SC.h"
+#import "UICollectionViewCell+SC.h"
 #import "UIImage+Remote.h"
 
-@implementation UITableViewCell (SC)
+@implementation UICollectionViewCell (SC)
 
 - (void) configureCellAtIndexPath:(NSIndexPath*)indexPath
-      imageViewKeyPath:(NSString*)keyPath
-          forTableView:(UITableView*)tableView
-      withImageForPath:(NSString*)path {
-    [self configureCellAtIndexPath:indexPath imageViewKeyPath:keyPath forTableView:tableView withImageForPath:path placeholderImage:nil];
+                 imageViewKeyPath:(NSString*)keyPath
+                forCollectionView:(UICollectionView*)collectionView
+                 withImageForPath:(NSString*)path {
+    [self configureCellAtIndexPath:indexPath imageViewKeyPath:keyPath forCollectionView:collectionView withImageForPath:path placeholderImage:nil];
 }
 
 - (void) configureCellAtIndexPath:(NSIndexPath*)indexPath
                  imageViewKeyPath:(NSString*)keyPath
-                     forTableView:(UITableView*)tableView
+                forCollectionView:(UICollectionView*)collectionView
                  withImageForPath:(NSString*)path
                  placeholderImage:(UIImage*)placeholderImage {
     static NSIndexPath* currentPath = nil;
@@ -35,7 +35,7 @@
                }
                id innerCell = self;
                if (currentPath != indexPath) {
-                   innerCell = [tableView cellForRowAtIndexPath:indexPath];
+                   innerCell = [collectionView cellForItemAtIndexPath:indexPath];
                }
                UIImageView* imageView = [innerCell valueForKeyPath:keyPath];
                if (cache == nil) {
@@ -49,4 +49,5 @@
                }
            }];    
 }
+
 @end
