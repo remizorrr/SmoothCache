@@ -21,4 +21,10 @@
                  withImageForPath:(NSString*)path
                  placeholderImage:(UIImage*)placeholderImage;
 
+- (void) configureHeaderAtIndexPath:(NSIndexPath*)indexPath
+                 imageViewKeyPath:(NSString*)keyPath
+                     forTableView:(UITableView*)tableView
+                 withImageForPath:(NSString*)path
+                 placeholderImage:(UIImage*)placeholderImage;
+
 @end

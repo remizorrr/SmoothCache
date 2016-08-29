@@ -49,4 +49,38 @@
                }
            }];    
 }
+
+- (void) configureHeaderAtIndexPath:(NSIndexPath*)indexPath
+                   imageViewKeyPath:(NSString*)keyPath
+                       forTableView:(UITableView*)tableView
+                   withImageForPath:(NSString*)path
+                   placeholderImage:(UIImage*)placeholderImage {
+    UIImageView* imageView = [self valueForKeyPath:keyPath];
+    imageView.image = nil;
+    
+    [UIImage imageForPath:path
+           withCompletion:^(UIImage *image, NSString *cache) {
+               if (!image) {
+                   image = placeholderImage;
+               }
+               id innerCell = [tableView headerViewForSection:indexPath.section];
+               if (!innerCell) {
+                   innerCell = self;
+               }
+               if (![innerCell respondsToSelector:NSSelectorFromString(keyPath)]) {
+                   return ;
+               }
+               UIImageView* imageView = [innerCell valueForKeyPath:keyPath];
+               if (cache == nil) {
+                   imageView.alpha = 0.0;
+                   imageView.image = image;
+                   [UIView animateWithDuration:0.4 animations:^{
+                       imageView.alpha = 1.0;
+                   }];
+               } else {
+                   imageView.image = image;
+               }
+           }];
+}
+
 @end
