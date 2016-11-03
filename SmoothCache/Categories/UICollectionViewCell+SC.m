@@ -23,6 +23,20 @@
                 forCollectionView:(UICollectionView*)collectionView
                  withImageForPath:(NSString*)path
                  placeholderImage:(UIImage*)placeholderImage {
+    [self configureCellAtIndexPath:indexPath
+                  imageViewKeyPath:keyPath 
+                 forCollectionView:collectionView
+                  withImageForPath:path
+                  placeholderImage:placeholderImage
+                        completion:nil];
+}
+
+- (void) configureCellAtIndexPath:(NSIndexPath*)indexPath
+                 imageViewKeyPath:(NSString*)keyPath
+                forCollectionView:(UICollectionView*)collectionView
+                 withImageForPath:(NSString*)path
+                 placeholderImage:(UIImage*)placeholderImage
+                       completion:(void(^)(UIImage* image))completionBlock {
     static NSIndexPath* currentPath = nil;
     currentPath = indexPath;
     UIImageView* imageView = [self valueForKeyPath:keyPath];
@@ -47,7 +61,10 @@
                } else {
                    imageView.image = image;
                }
-           }];    
+               if (completionBlock) {
+                   completionBlock(image);
+               }
+           }];
 }
 
 @end

@@ -21,4 +21,10 @@
                  withImageForPath:(NSString*)path
                  placeholderImage:(UIImage*)placeholderImage;
 
+- (void) configureCellAtIndexPath:(NSIndexPath*)indexPath
+                 imageViewKeyPath:(NSString*)keyPath
+                forCollectionView:(UICollectionView*)collectionView
+                 withImageForPath:(NSString*)path
+                 placeholderImage:(UIImage*)placeholderImage
+                       completion:(void(^)(UIImage* image))completionBlock;
 @end
