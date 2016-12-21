@@ -38,6 +38,12 @@
                    innerCell = [tableView cellForRowAtIndexPath:indexPath];
                }
                UIImageView* imageView = [innerCell valueForKeyPath:keyPath];
+               if (![imageView isKindOfClass:[UIImageView class]]) {
+                   @throw [NSException
+                           exceptionWithName:@"imageView is no UIImageView"
+                           reason:[NSString stringWithFormat:@"Object at keypath \"%@\" is not an imageView",keyPath]
+                           userInfo:nil];
+               }
                if (cache == nil) {
                    imageView.alpha = 0.0;
                    imageView.image = image;
