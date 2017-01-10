@@ -26,12 +26,14 @@
     static NSIndexPath* currentPath = nil;
     currentPath = indexPath;
     UIImageView* imageView = [self valueForKeyPath:keyPath];
-    imageView.image = nil;
+    imageView.image = placeholderImage;
     
     [UIImage imageForPath:path
            withCompletion:^(UIImage *image, NSString *cache) {
                if (!image) {
                    image = placeholderImage;
+                   imageView.image = image;
+                   return;
                }
                id innerCell = self;
                if (currentPath != indexPath) {
