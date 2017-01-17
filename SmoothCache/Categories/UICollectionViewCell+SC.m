@@ -8,6 +8,7 @@
 
 #import "UICollectionViewCell+SC.h"
 #import "UIImage+Remote.h"
+#import <Crashlytics/Crashlytics.h>
 
 @implementation UICollectionViewCell (SC)
 
@@ -52,6 +53,11 @@
                    innerCell = [collectionView cellForItemAtIndexPath:indexPath];
                }
                UIImageView* imageView = [innerCell valueForKeyPath:keyPath];
+               if (![imageView isKindOfClass:[UIImageView class]]) {
+                   NSString* description =  [NSString stringWithFormat:@"Object at keypath \"%@\" for cell \"%@\" of type \"%@\" is not an imageView",innerCell, [innerCell class], keyPath];
+                   CLS_LOG(@"ERROR: %@", description);
+                   return;
+               }
                if (cache == nil) {
                    imageView.alpha = 0.0;
                    imageView.image = image;

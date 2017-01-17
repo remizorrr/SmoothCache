@@ -8,6 +8,7 @@
 
 #import "UITableViewCell+SC.h"
 #import "UIImage+Remote.h"
+#import <Crashlytics/Crashlytics.h>
 
 @implementation UITableViewCell (SC)
 
@@ -39,10 +40,9 @@
                }
                UIImageView* imageView = [innerCell valueForKeyPath:keyPath];
                if (![imageView isKindOfClass:[UIImageView class]]) {
-                   @throw [NSException
-                           exceptionWithName:@"imageView is no UIImageView"
-                           reason:[NSString stringWithFormat:@"Object at keypath \"%@\" is not an imageView",keyPath]
-                           userInfo:nil];
+                   NSString* description =  [NSString stringWithFormat:@"Object at keypath \"%@\" for cell \"%@\" of type \"%@\" is not an imageView",innerCell, [innerCell class], keyPath];
+                   CLS_LOG(@"ERROR: %@", description);
+                   return;
                }
                if (cache == nil) {
                    imageView.alpha = 0.0;
